@@ -83,6 +83,7 @@ local gearTracksConfigOptions = {
   dfseason3 = {
     type = "execute",
     name = "DF Season 3",
+    desc = DFS3Exp.." or "..DFS3Adv.." or "..DFS3Vet.." or "..DFS3Champ.." or "..DFS3Hero.." or "..DFS3Myth,
     func = function () categories:CreateCategory( { name = L:G("DF Season 3"), itemList={}, save = true,
       searchCategory = {
         query = DFS3Exp.." or "..DFS3Adv.." or "..DFS3Vet.." or "..DFS3Champ.." or "..DFS3Hero.." or "..DFS3Myth,
@@ -95,6 +96,7 @@ local gearTracksConfigOptions = {
   dfseason4 = {
     type = "execute",
     name = "DF Season 4",
+    desc = DFS4Exp.." or "..DFS4Adv.." or "..DFS4Vet.." or "..DFS4Champ.." or "..DFS4Hero.." or "..DFS4Myth,
     func = function () categories:CreateCategory( { name = L:G("DF Season 4"), itemList={}, save = true,
       searchCategory = {
         query = DFS4Exp.." or "..DFS4Adv.." or "..DFS4Vet.." or "..DFS4Champ.." or "..DFS4Hero.." or "..DFS4Myth,
@@ -120,6 +122,7 @@ local gearTracksConfigOptions = {
   wwseason1 = {
     type = "execute",
     name = "WW Season 1",
+    desc = WWS1Exp.." or "..WWS1Adv.." or "..WWS1Vet.." or "..WWS1Champ.." or "..WWS1Hero.." or "..WWS1Myth,
     func = function () categories:CreateCategory( { name = L:G("DF Season 4"), itemList={}, save = true,
       searchCategory = {
         query = WWS1Exp.." or "..WWS1Adv.." or "..WWS1Vet.." or "..WWS1Champ.." or "..WWS1Hero.." or "..WWS1Myth,
@@ -132,6 +135,7 @@ local gearTracksConfigOptions = {
   dfcrafted = {
     type = "execute",
     name = "DF Crafted",
+    desc = DFCrafted,
     func = function () categories:CreateCategory( { name = L:G("DF Crafted"), itemList={}, save = true,
       searchCategory = {
         query = DFCrafted,
@@ -144,6 +148,7 @@ local gearTracksConfigOptions = {
   dfS1crafted = {
     type = "execute",
     name = "DF S1 Crafted",
+    desc = DFS1Crafted,
     func = function () categories:CreateCategory( { name = L:G("DF S1 Crafted"), itemList={}, save = true,
       searchCategory = {
         query = DFS1Crafted,
@@ -156,6 +161,7 @@ local gearTracksConfigOptions = {
   dfS2crafted = {
     type = "execute",
     name = "DF S2 Crafted",
+    desc = DFS2Crafted,
     func = function () categories:CreateCategory( { name = L:G("DF S2 Crafted"), itemList={}, save = true,
       searchCategory = {
         query = DFS2Crafted,
@@ -168,6 +174,7 @@ local gearTracksConfigOptions = {
   dfS3crafted = {
     type = "execute",
     name = "DF S3 Crafted",
+    desc = DFS3Crafted,
     func = function () categories:CreateCategory( { name = L:G("DF S3 Crafted"), itemList={}, save = true,
       searchCategory = {
         query = DFS3Crafted,
@@ -180,6 +187,7 @@ local gearTracksConfigOptions = {
   dfS4crafted = {
     type = "execute",
     name = "DF S4 Crafted",
+    desc = DFS4Crafted,
     func = function () categories:CreateCategory( { name = L:G("DF S4 Crafted"), itemList={}, save = true,
       searchCategory = {
         query = DFS4Crafted,
@@ -192,6 +200,7 @@ local gearTracksConfigOptions = {
   wwcrafted = {
     type = "execute",
     name = "WW Crafted",
+    desc = WWCrafted,
     func = function () categories:CreateCategory( { name = L:G("WW Crafted"), itemList={}, save = true,
       searchCategory = {
         query = WWCrafted,
@@ -204,6 +213,7 @@ local gearTracksConfigOptions = {
   wwS1crafted = {
     type = "execute",
     name = "WW S1 Crafted",
+    desc = WWS1Crafted,
     func = function () categories:CreateCategory( { name = L:G("WW Crafted"), itemList={}, save = true,
       searchCategory = {
         query = WWS1Crafted,
