@@ -1,0 +1,21 @@
+## Interface: 110000,110002
+
+## Title: BetterBags_GearTracks
+## Notes: Adds categories for classifing gear by tracks or season to BetterBags.
+## Author: Zeptognome
+## Version: @project-version@
+## X-Date: @project-date-iso@
+## IconTexture: Interface\Icons\INV_10_Engineering_ManufacturedParts_Gear_Uprez
+# INV_Misc_Gear_01
+## X-Website: https://github.com/zeptognome/BetterBags_GearTracks
+
+## DefaultState: Enabled
+## Dependencies: BetterBags
+
+## X-Category: Bags & Inventory
+## X-License: MIT
+## X-Curse-Project-ID: 1083120
+## X-Wago-ID: 4N2mMmGL
+
+BetterBags_GearTracks.lua
+
