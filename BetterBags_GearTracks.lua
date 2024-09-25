@@ -311,8 +311,3 @@ if (config.AddPluginConfig) then
 else
   print ("BetterBags_GearTracks NOT loaded. Betterbags Plugin API Incompatible.")
 end
-
-config.configFrame:AddSubSection({
-  title = 'GearTracks',
-  description = 'Gear_Tracks settings',
-})
