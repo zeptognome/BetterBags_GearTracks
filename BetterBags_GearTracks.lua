@@ -13,11 +13,16 @@ local config = addon:GetModule('Config')
 ---@class Events: AceModule
 local events = addon:GetModule('Events')
 
+---@class Context: AceModule
+local context = addon:GetModule('Context')
+
 ---@class Localization: AceModule
 local L = addon:GetModule('Localization')
 
 ---@class GearTracks: AceModule
 local geartracks = addon:NewModule('GearTracks')
+
+local mycontext = context:New('BetterBags_GearTracks Create Category')
 
 local DFS2Exp = "bonusid=9294 or bonusid=9295 or bonusid=9296 or bonusid=9297 or bonusid=9298 or bonusid=9299 or bonusid=9300 or bonusid=9301"
 local DFS2Adv = "bonusid=9302 or bonusid=9303 or bonusid=9304 or bonusid=9305 or bonusid=9306 or bonusid=9307 or bonusid=9308 or bonusid=9309"
@@ -39,7 +44,10 @@ local DFS4Vet = "bonusid=10341 or bonusid=10342 or bonusid=10343 or bonusid=1034
 local DFS4Champ = "bonusid=10313 or bonusid=10314 or bonusid=10315 or bonusid=10316 or bonusid=10317 or bonusid=10318 or bonusid=10319 or bonusid=10320"
 local DFS4Hero = "bonusid=10329 or bonusid=10330 or bonusid=10331 or bonusid=10332 or bonusid=10333 or bonusid=10334"
 local DFS4Myth = "bonusid=10335 or bonusid=10336 or bonusid=10337 or bonusid=10338"
-local DFS4Awake = "bonusid=10884"
+
+local DFS4AwakeRaid = "bonusid=10884"
+local DFS4AwakeVendor12 = "bonusid = 10407 or bonusid = 10408 or bonusid = 10409 or bonusid = 10410 or bonusid = 10411 or bonusid = 10412 or bonusid = 10413 or bonusid = 10414 or bonusid = 10415 or bonusid = 10416 or bonusid = 10417 or bonusid = 10418"
+local DFS4AwakeVendor14 = "bonusid = 10490 or bonusid = 10491 or bonusid = 10492 or bonusid = 10493 or bonusid = 10494 or bonusid = 10495 or bonusid = 10496 or bonusid = 10497 or bonusid = 10498 or bonusid = 10499 or bonusid = 10500 or bonusid = 10501 or bonusid = 10502 or bonusid = 10503"
 
 local WWS1Exp = "bonusid=10289 or bonusid=10288 or bonusid=10287 or bonusid=10286 or bonusid=10285 or bonusid=10284 or bonusid=10283 or bonusid=10282"
 local WWS1Adv = "bonusid=10297 or bonusid=10296 or bonusid=10295 or bonusid=10294 or bonusid=10293 or bonusid=10292 or bonusid=10291 or bonusid=10290"
@@ -70,157 +78,229 @@ local gearTracksConfigOptions = {
   dfseason2 = {
     type = "execute",
     name = "DF Season 2",
-    desc = DFS2Exp.." or "..DFS2Adv.." or "..DFS2Vet.." or "..DFS2Champ.." or "..DFS2Hero.." or "..DFS2Myth,
-    func = function () categories:CreateCategory( { name = L:G("DF Season 2"), itemList={}, save = true,
+    func = function () categories:CreateCategory(mycontext,  { name = L:G("DF Season 2"), itemList={}, save = true,
       searchCategory = {
         query = DFS2Exp.." or "..DFS2Adv.." or "..DFS2Vet.." or "..DFS2Champ.." or "..DFS2Hero.." or "..DFS2Myth,
       },
       note = L:G("Created by BetterBags_GearTracks"),
       priority = 10,} )
-      events:SendMessage('categories/Changed')
+      events:SendMessage(mycontext, 'bags/FullRefreshAll')
     end,
   },
   dfseason3 = {
     type = "execute",
     name = "DF Season 3",
-    desc = DFS3Exp.." or "..DFS3Adv.." or "..DFS3Vet.." or "..DFS3Champ.." or "..DFS3Hero.." or "..DFS3Myth,
-    func = function () categories:CreateCategory( { name = L:G("DF Season 3"), itemList={}, save = true,
+    func = function () categories:CreateCategory(mycontext,  { name = L:G("DF Season 3"), itemList={}, save = true,
       searchCategory = {
         query = DFS3Exp.." or "..DFS3Adv.." or "..DFS3Vet.." or "..DFS3Champ.." or "..DFS3Hero.." or "..DFS3Myth,
       },
       note = L:G("Created by BetterBags_GearTracks"),
       priority = 10,} )
-      events:SendMessage('categories/Changed')
+      events:SendMessage(mycontext, 'bags/FullRefreshAll')
     end,
   },
   dfseason4 = {
     type = "execute",
     name = "DF Season 4",
-    desc = DFS4Exp.." or "..DFS4Adv.." or "..DFS4Vet.." or "..DFS4Champ.." or "..DFS4Hero.." or "..DFS4Myth,
-    func = function () categories:CreateCategory( { name = L:G("DF Season 4"), itemList={}, save = true,
+    func = function () categories:CreateCategory(mycontext,  { name = L:G("DF Season 4"), itemList={}, save = true,
       searchCategory = {
         query = DFS4Exp.." or "..DFS4Adv.." or "..DFS4Vet.." or "..DFS4Champ.." or "..DFS4Hero.." or "..DFS4Myth,
       },
       note = L:G("Created by BetterBags_GearTracks"),
       priority = 10,} )
-      events:SendMessage('categories/Changed')
+      events:SendMessage(mycontext, 'bags/FullRefreshAll')
     end,
   },
-  dfseason4awake = {
+  dfseason4awakeraid = {
     type = "execute",
-    name = "DF Awakened",
-    desc = DFS4Awake,
-    func = function () categories:CreateCategory( { name = L:G("DF Awakened"), itemList={}, save = true,
+    name = "DF Awakened Raid",
+    func = function () categories:CreateCategory(mycontext,  { name = L:G("DF Awakened Raid"), itemList={}, save = true,
       searchCategory = {
-        query = DFS4Awake,
+        query = DFS4AwakeRaid,
       },
       note = L:G("Created by BetterBags_GearTracks"),
       priority = 10,} )
-      events:SendMessage('categories/Changed')
+      events:SendMessage(mycontext, 'bags/FullRefreshAll')
+    end,
+  },
+  dfseason4awakevendor = {
+    type = "execute",
+    name = "DF Awakened Vendor",
+    func = function () categories:CreateCategory(mycontext,  { name = L:G("DF Awakened Vendor"), itemList={}, save = true,
+      searchCategory = {
+        query = DFS4AwakeVendor12.." or "..DFS4AwakeVendor14,
+      },
+      note = L:G("Created by BetterBags_GearTracks"),
+      priority = 10,} )
+      events:SendMessage(mycontext, 'bags/FullRefreshAll')
     end,
   },
   wwseason1 = {
     type = "execute",
     name = "WW Season 1",
-    desc = WWS1Exp.." or "..WWS1Adv.." or "..WWS1Vet.." or "..WWS1Champ.." or "..WWS1Hero.." or "..WWS1Myth,
-    func = function () categories:CreateCategory( { name = L:G("DF Season 4"), itemList={}, save = true,
+    func = function () categories:CreateCategory(mycontext,  { name = L:G("WW Season 1"), itemList={}, save = true,
       searchCategory = {
         query = WWS1Exp.." or "..WWS1Adv.." or "..WWS1Vet.." or "..WWS1Champ.." or "..WWS1Hero.." or "..WWS1Myth,
       },
       note = L:G("Created by BetterBags_GearTracks"),
       priority = 10,} )
-      events:SendMessage('categories/Changed')
+      events:SendMessage(mycontext, 'bags/FullRefreshAll')
+    end,
+  },
+  wwseason1exp = {
+    type = "execute",
+    name = "WW Season 1 Explorer",
+    func = function () categories:CreateCategory(mycontext,  { name = L:G("WW Season 1 Explorer"), itemList={}, save = true,
+      searchCategory = {
+        query = WWS1Exp,
+      },
+      note = L:G("Created by BetterBags_GearTracks"),
+      priority = 10,} )
+      events:SendMessage(mycontext, 'bags/FullRefreshAll')
+    end,
+  },
+  wwseason1adv = {
+    type = "execute",
+    name = "WW Season 1 Adventurer",
+    func = function () categories:CreateCategory(mycontext,  { name = L:G("WW Season 1 Adventurer"), itemList={}, save = true,
+      searchCategory = {
+        query = WWS1Adv,
+      },
+      note = L:G("Created by BetterBags_GearTracks"),
+      priority = 10,} )
+      events:SendMessage(mycontext, 'bags/FullRefreshAll')
+    end,
+  },
+  wwseason1vet = {
+    type = "execute",
+    name = "WW Season 1 Vetran",
+    func = function () categories:CreateCategory(mycontext,  { name = L:G("WW Season 1 Vetran"), itemList={}, save = true,
+      searchCategory = {
+        query = WWS1Vet,
+      },
+      note = L:G("Created by BetterBags_GearTracks"),
+      priority = 10,} )
+      events:SendMessage(mycontext, 'bags/FullRefreshAll')
+    end,
+  },
+  wwseason1champ = {
+    type = "execute",
+    name = "WW Season 1 Champion",
+    func = function () categories:CreateCategory(mycontext,  { name = L:G("WW Season 1 Champion"), itemList={}, save = true,
+      searchCategory = {
+        query = WWS1Champ,
+      },
+      note = L:G("Created by BetterBags_GearTracks"),
+      priority = 10,} )
+      events:SendMessage(mycontext, 'bags/FullRefreshAll')
+    end,
+  },
+  wwseason1hero = {
+    type = "execute",
+    name = "WW Season 1 Hero",
+    func = function () categories:CreateCategory(mycontext,  { name = L:G("WW Season 1 Hero"), itemList={}, save = true,
+      searchCategory = {
+        query = WWS1Hero,
+      },
+      note = L:G("Created by BetterBags_GearTracks"),
+      priority = 10,} )
+      events:SendMessage(mycontext, 'bags/FullRefreshAll')
+    end,
+  },
+  wwseason1myth = {
+    type = "execute",
+    name = "WW Season 1 Myth",
+    func = function () categories:CreateCategory(mycontext,  { name = L:G("WW Season 1 Myth"), itemList={}, save = true,
+      searchCategory = {
+        query = WWS1Myth,
+      },
+      note = L:G("Created by BetterBags_GearTracks"),
+      priority = 10,} )
+      events:SendMessage(mycontext, 'bags/FullRefreshAll')
     end,
   },
   dfcrafted = {
     type = "execute",
     name = "DF Crafted",
-    desc = DFCrafted,
-    func = function () categories:CreateCategory( { name = L:G("DF Crafted"), itemList={}, save = true,
+    func = function () categories:CreateCategory(mycontext,  { name = L:G("DF Crafted"), itemList={}, save = true,
       searchCategory = {
         query = DFCrafted,
       },
       note = L:G("Created by BetterBags_GearTracks"),
       priority = 10,} )
-      events:SendMessage('categories/Changed')
+      events:SendMessage(mycontext, 'bags/FullRefreshAll')
     end,
   },
   dfS1crafted = {
     type = "execute",
     name = "DF S1 Crafted",
-    desc = DFS1Crafted,
-    func = function () categories:CreateCategory( { name = L:G("DF S1 Crafted"), itemList={}, save = true,
+    func = function () categories:CreateCategory(mycontext,  { name = L:G("DF S1 Crafted"), itemList={}, save = true,
       searchCategory = {
         query = DFS1Crafted,
       },
       note = L:G("Created by BetterBags_GearTracks"),
       priority = 10,} )
-      events:SendMessage('categories/Changed')
+      events:SendMessage(mycontext, 'bags/FullRefreshAll')
     end,
   },
   dfS2crafted = {
     type = "execute",
     name = "DF S2 Crafted",
-    desc = DFS2Crafted,
-    func = function () categories:CreateCategory( { name = L:G("DF S2 Crafted"), itemList={}, save = true,
+    func = function () categories:CreateCategory(mycontext,  { name = L:G("DF S2 Crafted"), itemList={}, save = true,
       searchCategory = {
         query = DFS2Crafted,
       },
       note = L:G("Created by BetterBags_GearTracks"),
       priority = 10,} )
-      events:SendMessage('categories/Changed')
+      events:SendMessage(mycontext, 'bags/FullRefreshAll')
     end,
   },
   dfS3crafted = {
     type = "execute",
     name = "DF S3 Crafted",
-    desc = DFS3Crafted,
-    func = function () categories:CreateCategory( { name = L:G("DF S3 Crafted"), itemList={}, save = true,
+    func = function () categories:CreateCategory(mycontext,  { name = L:G("DF S3 Crafted"), itemList={}, save = true,
       searchCategory = {
         query = DFS3Crafted,
       },
       note = L:G("Created by BetterBags_GearTracks"),
       priority = 10,} )
-      events:SendMessage('categories/Changed')
+      events:SendMessage(mycontext, 'bags/FullRefreshAll')
     end,
   },
   dfS4crafted = {
     type = "execute",
     name = "DF S4 Crafted",
-    desc = DFS4Crafted,
-    func = function () categories:CreateCategory( { name = L:G("DF S4 Crafted"), itemList={}, save = true,
+    func = function () categories:CreateCategory(mycontext,  { name = L:G("DF S4 Crafted"), itemList={}, save = true,
       searchCategory = {
         query = DFS4Crafted,
       },
       note = L:G("Created by BetterBags_GearTracks"),
       priority = 10,} )
-      events:SendMessage('categories/Changed')
+      events:SendMessage(mycontext, 'bags/FullRefreshAll')
     end,
   },
   wwcrafted = {
     type = "execute",
     name = "WW Crafted",
-    desc = WWCrafted,
-    func = function () categories:CreateCategory( { name = L:G("WW Crafted"), itemList={}, save = true,
+    func = function () categories:CreateCategory(mycontext,  { name = L:G("WW Crafted"), itemList={}, save = true,
       searchCategory = {
         query = WWCrafted,
       },
       note = L:G("Created by BetterBags_GearTracks"),
       priority = 10,} )
-      events:SendMessage('categories/Changed')
+      events:SendMessage(mycontext, 'bags/FullRefreshAll')
     end,
   },
   wwS1crafted = {
     type = "execute",
     name = "WW S1 Crafted",
-    desc = WWS1Crafted,
-    func = function () categories:CreateCategory( { name = L:G("WW Crafted"), itemList={}, save = true,
+    func = function () categories:CreateCategory(mycontext,  { name = L:G("WW S1 Crafted"), itemList={}, save = true,
       searchCategory = {
         query = WWS1Crafted,
       },
       note = L:G("Created by BetterBags_GearTracks"),
       priority = 10,} )
-      events:SendMessage('categories/Changed')
+      events:SendMessage(mycontext, 'bags/FullRefreshAll')
     end,
   },
 }
@@ -231,3 +311,8 @@ if (config.AddPluginConfig) then
 else
   print ("BetterBags_GearTracks NOT loaded. Betterbags Plugin API Incompatible.")
 end
+
+config.configFrame:AddSubSection({
+  title = 'GearTracks',
+  description = 'Gear_Tracks settings',
+})
